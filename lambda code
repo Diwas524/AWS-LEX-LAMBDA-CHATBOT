@@ -1,0 +1,58 @@
+# For celsius to Kelvin conversion
+
+import json
+def lambda_handler(event, context):
+    urx=int(event["currentIntent"]["slots"]["ck"])
+    ury=(urx+273)
+    
+    return {
+        "sessionAttributes":event["sessionAttributes"],
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType": "PlainText",
+                "content":"the equivalent of "+str(urx)+" degree celsius is "+str(ury)+ " kelvin"
+    }
+    }
+}
+
+
+# For Celsius to Farenheit conversion
+
+import json
+def lambda_handler(event, context):
+    x=int(event["currentIntent"]["slots"]["c"])
+    y=x*9/5+ 32
+    
+    return {
+        "sessionAttributes":event["sessionAttributes"],
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType": "PlainText",
+                "content":"the equivalent of "+str(x)+" degree celsius is "+str(y)+ " degree farenheit"
+    }
+    }
+}
+
+
+#For Farenheit to celsius conversion
+
+import json
+def lambda_handler(event, context):
+    ux=int(event["currentIntent"]["slots"]["f"])
+    uy=(ux-32)*5/9
+    
+    return {
+        "sessionAttributes":event["sessionAttributes"],
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType": "PlainText",
+                "content":"the equivalent of "+str(ux)+" degree  farenheit is "+str(uy)+ " degree celsius"
+    }
+    }
+}
