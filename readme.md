@@ -55,3 +55,6 @@ Thats it! Our bot is now ready. You can build the bot and test it, and the conve
 
 ![greet](<./output.png>)
 
+<h1> WEATHER CHATBOT </h1>
+
+![weather](https://github.com/Diwas524/AWS-LEX-LAMBDA-CHATBOT/blob/main/weather_output.png)
