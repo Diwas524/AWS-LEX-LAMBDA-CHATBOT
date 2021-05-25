@@ -1,0 +1,38 @@
+import json
+import urllib3
+http = urllib3.PoolManager()
+
+def lambda_handler(event, context):
+    ux=str(event["currentIntent"]["slots"]["city"])
+    api_key = "bab317774441f031335746d581f4b166"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    complete_url = base_url + "appid=" + api_key + "&q=" + ux
+    r = http.request('GET', complete_url)
+    x = json.loads(r.data.decode('utf-8')) #to json format
+    if x["cod"] != "404": 
+        y = x["main"] 
+        current_temperature = y["temp"]
+        current_pressure = y["pressure"]
+        current_humidiy = y["humidity"]
+        z = x["weather"] 
+        weather_description = z[0]["description"]
+    yy=(" Temperature of "+ux+" is " +
+                    str(current_temperature-273) + 
+          "\n, atmospheric pressure is " +
+                    str(current_pressure) +
+          "\nhpa, humidity is " +
+                    str(current_humidiy) +
+          "\n% & has " +
+                    str(weather_description)) 
+   
+    return {
+        "sessionAttributes":event["sessionAttributes"],
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType": "PlainText",
+                "content":yy
+    }
+    }
+}
